@@ -5,10 +5,15 @@ from .forms import PostForm
 
 def new(request):
     if request.method == "POST":
+        #title = request.POST.get('title')
+        #content = request.POST.get('content')
+        #writer=request.user
+        #image=request.FILES.get('image')
+        #Post.objects.create(title=title, content=content, writer=writer,image=image)
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(user = request.user)
-        return redirect('main')
+        return redirect('posts:main')
     else:
         form = PostForm
     return render(request, 'posts/new.html', {'form':form})
